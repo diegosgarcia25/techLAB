@@ -1,0 +1,16 @@
+-- Impala-shell
+---- show databases;
+---- use database nomedatabase;
+---- show tables;
+---- # caso nao esteja conseguindo visualizacao das tabelas: invalidate metadata;
+
+-- create tabela externa a partir do parquet salvo apos flatten
+-- se necessario, mudanca para orc pode ser realizada
+
+/* CREATE EXTERNAL TABLE tb_cart_recom_impala LIKE PARQUET 'parquet_no_hdfs_com_caminho_completo'
+STORED AS PARQUET
+LOCATION 'path_destino'; */
+ 
+CREATE EXTERNAL TABLE tb_cart_recom_impala LIKE PARQUET 'hdfs://localhost/tmp/tb_cart_recom/part-r-00000-f7f1cfd8-1054-4018-867e-16da831a99b8.gz.parquet'
+STORED AS PARQUET
+LOCATION '/tmp/tb_cart_recom';
